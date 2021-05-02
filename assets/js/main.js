@@ -120,8 +120,6 @@ function renderTides(tideData) {
         $('.tide-location').text(`(${tideLocation})`);
     }
 
-    console.log(tideData.extremes)
-
     if (tideData.extremes[0].date !== NaN) {
         if (tideData.extremes[0].type === 'High') {
             var highTideTimeUtc = moment.utc(tideData.extremes[0].date);
@@ -203,7 +201,6 @@ function setupTideMarker() {
 function populateLocation(locationData) {
     locationData = locationData.results[0]?.components;
     if (locationData != null) {
-        console.log (locationData)
         $('.location').text(`${locationData.city_district != null ? locationData.city_district : locationData.city}, ${locationData.county}, ${locationData.country}`);
     }
 }
