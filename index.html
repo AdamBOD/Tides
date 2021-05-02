@@ -9,49 +9,76 @@
         <link rel="stylesheet" type="text/css" href="assets/lib/jquery/jquery-ui.structure.min.css"/>
         <link rel="stylesheet" type="text/css" href="assets/lib/jquery/jquery-ui.theme.min.css"/>
 
+        <link rel="icon" type="image/x-icon" href="assets/images/icons/favicon.ico">
+        <link rel="apple-touch-icon" sizes="72x72" href="assets/images/icons/icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="96x96" href="assets/images/icons/icon-96x96.png">
+        <link rel="apple-touch-icon" sizes="128x128" href="assets/images/icons/icon-128x128.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="assets/images/icons/icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="assets/images/icons/icon-152x152.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="assets/images/icons/icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="384x384" href="assets/images/icons/icon-384x384.png">
+        <link rel="icon" type="image/png" sizes="512x512" href="assets/images/icons/icon-512x512.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="assets/images/icons/icon-96x96.png">
+        
+        <link rel="manifest" href="./manifest.json">
+
         <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="description" content="Web App for predicting tide times at your current location.">
+        <meta name="theme-color" content="#5f9ecf">
+        <meta name="application-name" content="Tides">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-title" content="Tides">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     </head>
     <body>
-        <div class="tide-marker-container">
-            <div class="wave-marker"></div>
-            <div class="tide-marker"></div>
-        </div>
-        <div class="data-container">
-            <div class="owl-carousel owl-theme">
-                <div class="tide-info">
-                    <div class="location-info-container">
-                        <p class="heading">Location</p>
-                        <p class="location data"></p>
+        <div class="tide-container">
+            <div class="tide-marker-container">
+                <div class="wave-marker"></div>
+                <div class="tide-marker"></div>
+            </div>
+            <div class="data-container">
+                <div class="owl-carousel owl-theme">
+                    <div class="tide-info">
+                        <div class="location-info-container">
+                            <p class="heading">Location</p>
+                            <p class="location data"></p>
+                        </div>
+                        <div class="tides-info-container">
+                            <p class="heading">
+                                Tides<br>
+                                <small class="tide-location">(Nearest Location)</small>
+                            </p>
+                            <div class="tide-times-headings-container">
+                                <span class="heading">Low Tide</span>
+                                <span class="heading">High Tide</span>
+                            </div>
+                            <div>
+                                <span class="low-tide-time data"></span>
+                                <span class="high-tide-time data"></span>
+                            </div>
+                            <div>
+                                <span class="low-tide-height sub-heading"></span>
+                                <span class="high-tide-height sub-heading"></span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="tides-info-container">
-                        <p class="heading">Next Tides</p>
-                        <div class="tide-times-headings-container">
-                            <span class="heading">Low Tide</span>
-                            <span class="heading">High Tide</span>
-                        </div>
-                        <div>
-                            <span class="high-tide data"></span>
-                            <span class="low-tide data"></span>
-                        </div>
-                        <div>
-                            <span class="high-tide-height sub-heading"></span>
-                            <span class="low-tide-height sub-heading"></span>
-                        </div>
+    
+                    <div class="wind-info">
+                        Wind
                     </div>
-                </div>
-
-                <div class="wind-info">
-                    Wind
-                </div>
-                <div class="weather-info">
-                    Weather
-                </div>
-            </div>            
+                    <div class="weather-info">
+                        Weather
+                    </div>
+                </div>            
+            </div>
         </div>
 
         <script type="text/javascript" src="assets/lib/jquery/jquery-3.5.1.min.js"></script>
         <script type="text/javascript" src="assets/lib/jquery/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="assets/lib/moment/moment.js"></script>
         <script type="text/javascript" src="assets/lib/OwlCarousel/owl.carousel.min.js"></script>
+        <script type="text/javascript" src="register-sw.js"></script>
         <script type="text/javascript" src="assets/js/main.js"></script>
     </body>
 </html>
