@@ -1,0 +1,239 @@
+:root {
+	--primary-blue: #5F9EA0;
+	--secondary-blue: #5F9ECF;
+	--primary-white: #F0FFFF;
+
+	--data-container-dimensions: 360px;
+	--data-container-mobile-dimensions: 335px;
+	--data-container-border-width: 5px;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+
+	margin: 0;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+    
+	background-color: var(--primary-blue);
+	color: var(--primary-white);
+
+	background-image: url(../images/Sea.png);
+    background-size: auto 215px;
+    background-position: bottom left;
+    background-repeat: no-repeat;
+
+	margin: 0;
+
+	display: flex;
+
+	font-family: Arial, Helvetica, sans-serif;
+    
+    .tide-container {
+        width: var(--data-container-mobile-dimensions);
+        height: var(--data-container-mobile-dimensions);
+
+        position: relative;
+        top: 150px;
+        left: calc(50% - (var(--data-container-mobile-dimensions) / 2) - var(--data-container-border-width));
+
+        .tide-marker-container {
+            width: var(--data-container-mobile-dimensions);
+            height: var(--data-container-mobile-dimensions);
+
+            margin: var(--data-container-border-width);
+            
+            position: relative;
+    
+            border-radius: 50%;
+    
+            overflow: hidden;
+    
+            .tide-marker {
+                width: 100%;
+    
+                background-color: var(--secondary-blue);
+    
+                position: absolute;
+                bottom: 0;
+            }
+    
+            .wave-marker {
+                width: 100%;
+                height: 0;
+    
+                background-image: url('../images/waves.png');
+    
+                opacity: 0;
+    
+                position: absolute;
+                bottom: 0;
+    
+                -webkit-animation: wave-animation 7.5s infinite;
+                -webkit-animation-timing-function: linear;
+                animation: wave-animation 7.5s infinite;
+                animation-timing-function: linear;
+            }
+        }
+
+        .data-container {
+            width: var(--data-container-mobile-dimensions);
+            height: var(--data-container-mobile-dimensions);
+
+            background-color: transparent;
+
+            margin: auto;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+            
+            border: var(--data-container-border-width) solid var(--primary-white);
+            border-radius: 50%;
+    
+            overflow: hidden;
+    
+            .owl-carousel {
+                position: relative;
+    
+                .owl-item {
+                    height: var(--data-container-mobile-dimensions);
+    
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+    
+                .owl-dots {
+                    position: absolute;
+                    bottom: 15px;
+                    left: calc((var(--data-container-mobile-dimensions) / 2) - 36px);
+                }
+    
+                .tide-info {
+                    padding: 50px;
+    
+                    p {
+                        margin: 0;
+    
+                        text-align: center;
+                    }
+    
+                    .heading {
+                        margin-top: 15px;
+    
+                        font-size: 14px;
+                    }
+    
+                    .data {
+                        font-size: 18px;
+                    }
+    
+                    .sub-heading {
+                        font-size: 11px;
+                    }
+    
+                    span {
+                        display: flex;
+                    }
+    
+                    .tides-info-container {
+                        div {
+                            display: flex;
+                            justify-content: center;
+    
+                            span {
+                                margin-left: 7.5px;
+                                margin-right: 7.5px;
+                            }
+                        }
+    
+                        .tide-times-headings-container {
+                            margin-top: 0px;
+    
+                            span {
+                                margin-top: 0px;
+                            }
+                        }
+                    }
+                }
+
+                .wind-info {
+                    padding: 50px;
+                }
+            
+                .weather-info {
+                    padding: 50px;
+                }
+            }
+
+            .owl-carousel {
+                .owl-item {
+                    height: var(--data-container-mobile-dimensions);
+                }
+
+                .owl-dots {
+                    left: calc((var(--data-container-mobile-dimensions) / 2) - 36px);
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 450px) {
+	body {
+        background-position: bottom;
+        background-size: contain;
+
+        .tide-container {
+            position: absolute;
+            top: calc(50% - (var(--data-container-dimensions) / 2) - var(--data-container-border-width));
+            left: calc(50% - (var(--data-container-dimensions) / 2) - var(--data-container-border-width));
+
+            .tide-marker-container {
+                width: var(--data-container-dimensions);
+                height: var(--data-container-dimensions);
+            }
+    
+            .data-container {
+                width: var(--data-container-dimensions);
+                height: var(--data-container-dimensions);
+    
+                background-color: transparent;
+    
+                margin: auto;
+    
+                .owl-carousel {
+                    .owl-item {
+                        height: var(--data-container-dimensions);
+                    }
+    
+                    .owl-dots {
+                        left: calc((var(--data-container-dimensions) / 2) - 36px);
+                    }
+                }
+            }
+        }
+	}
+}
+
+@-webkit-keyframes wave-animation {
+	from {
+		background-position-x: 0px;
+	}
+	to {
+		background-position: -323px;
+	}
+}
+@keyframes wave-animation {
+	from {
+		background-position-x: 0px;
+	}
+	to {
+		background-position: -323px;
+	}
+}
