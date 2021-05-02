@@ -115,7 +115,8 @@ function renderTides(tideData) {
         var tideLocation = tideData.tideLocationData.results[0].components.city || 
             tideData.tideLocationData.results[0].components.city_district || 
             tideData.tideLocationData.results[0].components.town || 
-            tideData.tideLocationData.results[0].components.village;
+            tideData.tideLocationData.results[0].components.village ||
+            tideData.tideLocationData.results[0].components.county;
 
         $('.tide-location').text(`(${tideLocation})`);
     }
