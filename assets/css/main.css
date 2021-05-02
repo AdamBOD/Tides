@@ -1,0 +1,198 @@
+:root {
+    --primary-blue: #5F9EA0;
+    --secondary-blue: #5F9ECF;
+    --primary-white: #F0FFFF;
+
+    --data-container-dimensions: 360px;
+    --data-container-mobile-dimensions: 335px;
+    --data-container-border-width: 5px;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
+
+    display: flex;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: var(--primary-blue);
+    color: var(--primary-white);
+
+    background-image: url(../images/Sea.png);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.tide-marker-container {
+    width: var(--data-container-dimensions);
+    height: var(--data-container-dimensions);
+
+    margin: auto;
+
+    position: relative;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+}
+
+.tide-marker-container .tide-marker {
+    width: 100%;
+
+    background-color: var(--secondary-blue);
+
+    position: absolute;
+    bottom: 0;
+}
+
+.tide-marker-container .wave-marker {
+    width: 100%;
+    height: 0;
+
+    background-image: url('../images/waves.png');
+
+    opacity: 0;
+
+    position: absolute;
+    bottom: 0;
+    
+    -webkit-animation: wave-animation 7.5s infinite;
+    -webkit-animation-timing-function: linear;
+    animation: wave-animation 7.5s infinite;
+    animation-timing-function: linear;
+
+}
+
+@-webkit-keyframes wave-animation {
+    from {
+        background-position-x: 0px;
+    }
+    to {
+        background-position: -323px;
+    }
+}
+
+@keyframes wave-animation {
+    from {
+        background-position-x: 0px;
+    }
+    to {
+        background-position: -323px;
+    }
+}
+
+.data-container {
+    width: var(--data-container-dimensions);
+    height: var(--data-container-dimensions);
+
+    background-color: transparent;
+
+    position: absolute;
+    top: calc(50% - (var(--data-container-dimensions) / 2) - var(--data-container-border-width));
+    left: calc(50% - (var(--data-container-dimensions) / 2) - var(--data-container-border-width));
+
+    border: var(--data-container-border-width) solid var(--primary-white);
+    border-radius: 50%;
+
+    overflow: hidden;
+}
+
+.data-container .owl-carousel {
+    position: relative;
+}
+
+.data-container .owl-carousel .owl-item {
+    height: var(--data-container-dimensions);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.data-container .owl-carousel .owl-dots {
+    position: absolute;
+    bottom: 15px;
+    left: calc((var(--data-container-dimensions) / 2) - 36px);
+}
+
+.data-container .owl-carousel .tide-info, .wind-info, .weather-info {
+    padding: 50px
+}
+
+.data-container .owl-carousel .tide-info p {
+    text-align: center;
+    margin: 0;
+}
+
+.data-container .owl-carousel .tide-info .heading {
+    margin-top: 15px;
+
+    font-size: 14px;
+}
+
+.data-container .owl-carousel .tide-info .data {
+    font-size: 18px;
+}
+
+.data-container .owl-carousel .tide-info .sub-heading {
+    font-size: 11px;
+}
+
+.data-container .owl-carousel .tide-info span {
+    display: flex;
+}
+
+.data-container .owl-carousel .tide-info .tides-info-container div {
+    display: flex;
+    justify-content: center;
+}
+
+.data-container .owl-carousel .tide-info .tides-info-container .tide-times-headings-container {
+    margin-top: 0px
+}
+
+.data-container .owl-carousel .tide-info .tides-info-container .tide-times-headings-container span {
+    margin-top: 0px
+}
+
+.data-container .owl-carousel .tide-info .tides-info-container div span {
+    margin-left: 7.5px;
+    margin-right: 7.5px;
+}
+
+@media (max-width: 450px) {
+    body {
+        background-size: auto 215px;
+        background-position: bottom left;
+    }
+
+    .tide-marker-container {
+        width: var(--data-container-mobile-dimensions);
+        height: var(--data-container-mobile-dimensions);
+    }
+    
+    .data-container {
+        width: var(--data-container-mobile-dimensions);
+        height: var(--data-container-mobile-dimensions);
+    
+        background-color: transparent;
+    
+        position: absolute;
+        top: calc(50% - (var(--data-container-mobile-dimensions) / 2) - var(--data-container-border-width));
+        left: calc(50% - (var(--data-container-mobile-dimensions) / 2) - var(--data-container-border-width));
+    }
+
+    .data-container .owl-carousel .owl-item {
+        height: var(--data-container-mobile-dimensions);
+    }
+
+    .data-container .owl-carousel .owl-dots {
+        left: calc((var(--data-container-mobile-dimensions) / 2) - 36px);
+    }
+}
