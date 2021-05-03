@@ -87,10 +87,6 @@ function playWhenVisible(iconNum)
 //determine which icon is being loaded
 function determineIcon(index, toLoad, f, elem)
 {
-
-	
-
-
 	allIconsF[index] = f;
 	setTimeout(function(){
 		var thisIcon = f.select("#" + toLoad).node;
