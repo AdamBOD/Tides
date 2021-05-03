@@ -12,24 +12,24 @@ var windDirection;
 var windDirectionDeg;
 
 var weatherIcons = {
-    "01d": "sunnyIcon",
-    "02d": "partlyCloudyIcon",
-    "03d": "mostlyCloudyIcon",
-    "04d": "cloudyIcon",
-    "09d": "sunnyShowersIcon",
-    "10d": "rainyIcon",
-    "11d": "lightningIcon",
-    "13d": "snowShowersIcon",
-    "50d": "mistySunnyIcon",
-    "01n": "clearNightIcon",
-    "02n": "partlyCloudyNightIcon",
-    "03n": "cloudyIcon",
-    "04n": "cloudyIcon",
-    "09n": "rainyIcon",
-    "10n": "rainyIcon",
-    "11n": "lightningIcon",
-    "13n": "snowShowersIcon",
-    "50n": "mistyNightIcon"
+    '01d': 'sunnyIcon',
+    '02d': 'partlyCloudyIcon',
+    '03d': 'mostlyCloudyIcon',
+    '04d': 'cloudyIcon',
+    '09d': 'sunnyShowersIcon',
+    '10d': 'rainyIcon',
+    '11d': 'lightningIcon',
+    '13d': 'snowShowersIcon',
+    '50d': 'mistySunnyIcon',
+    '01n': 'clearNightIcon',
+    '02n': 'partlyCloudyNightIcon',
+    '03n': 'cloudyIcon',
+    '04n': 'cloudyIcon',
+    '09n': 'rainyIcon',
+    '10n': 'rainyIcon',
+    '11n': 'lightningIcon',
+    '13n': 'snowShowersIcon',
+    '50n': 'mistyNightIcon'
 }
 
 $(document).ready(function () {
@@ -237,7 +237,7 @@ function renderTides(tideData) {
         calculateTideHeight(lowTideTime, highTideTime);
     }
     else {
-        $('.highTide').html ("Error getting tide data.");
+        $('.highTide').html ('Error getting tide data.');
     }
 }
 

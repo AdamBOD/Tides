@@ -44,6 +44,7 @@ var filesToCache = [
     'assets/images/weatherIcons/snowShowersIcon.svg',
     'assets/images/weatherIcons/sunnyIcon.svg',
     'assets/images/weatherIcons/sunnyShowersIcon.svg',
+    'assets/svg/loading-rings.svg',
 ];
 
 this.addEventListener ('install', (event) => {
