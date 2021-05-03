@@ -93,12 +93,12 @@ body .tide-container .data-container {
 }
 
 body .tide-container .data-container.loaded .owl-carousel {
-  display: block;
+  opacity: 1;
 }
 
 body .tide-container .data-container .owl-carousel {
   position: relative;
-  display: none;
+  opacity: 0;
 }
 
 body .tide-container .data-container .owl-carousel .owl-item {
@@ -292,6 +292,8 @@ body .tide-container .data-container .owl-carousel .owl-dots {
     background-size: contain;
   }
   body .tide-container {
+    width: var(--data-container-tablet-dimensions);
+    height: var(--data-container-tablet-dimensions);
     position: absolute;
     top: calc(50% - (var(--data-container-tablet-dimensions) / 2) - var(--data-container-border-width));
     left: calc(50% - (var(--data-container-tablet-dimensions) / 2) - var(--data-container-border-width));

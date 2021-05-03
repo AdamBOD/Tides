@@ -113,14 +113,14 @@ body {
 
             &.loaded {
                 .owl-carousel {
-                    display: block;
+                    opacity: 1;
                 }
             }
     
             .owl-carousel {
                 position: relative;
 
-                display: none;
+                opacity: 0;
     
                 .owl-item {
                     height: var(--data-container-mobile-dimensions);
@@ -307,6 +307,9 @@ body {
         background-size: contain;
 
         .tide-container {
+            width: var(--data-container-tablet-dimensions);
+            height: var(--data-container-tablet-dimensions);
+
             position: absolute;
             top: calc(50% - (var(--data-container-tablet-dimensions) / 2) - var(--data-container-border-width));
             left: calc(50% - (var(--data-container-tablet-dimensions) / 2) - var(--data-container-border-width));
