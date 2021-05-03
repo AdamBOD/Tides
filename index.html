@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>Tides</title>
@@ -8,6 +9,7 @@
         <link rel="stylesheet" type="text/css" href="assets/lib/jquery/jquery-ui.min.css"/>
         <link rel="stylesheet" type="text/css" href="assets/lib/jquery/jquery-ui.structure.min.css"/>
         <link rel="stylesheet" type="text/css" href="assets/lib/jquery/jquery-ui.theme.min.css"/>
+        <link rel="stylesheet" type="text/css" href="assets/lib/dxcweathericons/dxcweathericons.css">
 
         <link rel="icon" type="image/x-icon" href="assets/images/icons/favicon.ico">
         <link rel="apple-touch-icon" sizes="72x72" href="assets/images/icons/icon-72x72.png">
@@ -50,34 +52,69 @@
                                 <small class="tide-location">(Nearest Location)</small>
                             </p>
                             <div class="tide-times-headings-container">
-                                <span class="heading">Low Tide</span>
-                                <span class="heading">High Tide</span>
+                                <p class="heading">Low Tide</p>
+                                <p class="heading">High Tide</p>
                             </div>
                             <div>
-                                <span class="low-tide-time data"></span>
-                                <span class="high-tide-time data"></span>
+                                <p class="low-tide-time tide-time data"></p>
+                                <p class="high-tide-time tide-time data"></p>
                             </div>
                             <div>
-                                <span class="low-tide-height sub-heading"></span>
-                                <span class="high-tide-height sub-heading"></span>
+                                <p class="low-tide-height sub-heading"></p>
+                                <p class="high-tide-height sub-heading"></p>
                             </div>
                         </div>
                     </div>
     
                     <div class="wind-info">
-                        Wind
+                        <div class="icon-container">
+                            <img class="wind-direction-icon" src="assets/images/DirectionIcon.png" alt="Wind Direction">
+                        </div>
+                            <span class="large-heading wind-direction"></span>
+                            <span class="heading wind-speed"></span>
                     </div>
+
                     <div class="weather-info">
-                        Weather
+                        <div class="weather-icons">
+                            <div id="sunnyIcon" class="weathericon sunnyIcon" style="display: none"></div>
+                            <div id="partlyCloudyIcon" class="weathericon partlyCloudyIcon" style="display: none"></div>
+                            <div id="mostlyCloudyIcon" class="weathericon mostlyCloudyIcon" style="display: none"></div>
+                            <div id="cloudyIcon" class="weathericon cloudyIcon" style="display: none"></div>
+                            <div id="sunnyShowersIcon" class="weathericon sunnyShowersIcon" style="display: none"></div>
+                            <div id="rainyIcon" class="weathericon rainyIcon" style="display: none"></div>
+                            <div id="lightningIcon" class="weathericon lightningIcon" style="display: none"></div>
+                            <div id="snowShowersIcon" class="weathericon snowShowersIcon" style="display: none"></div>
+                            <div id="mistySunnyIcon" class="weathericon mistySunnyIcon" style="display: none"></div>
+                            <div id="clearNightIcon" class="weathericon clearNightIcon" style="display: none"></div>
+                            <div id="partlyCloudyNightIcon" class="weathericon partlyCloudyNightIcon" style="display: none"></div>
+                            <div id="mistyNightIcon" class="weathericon mistyNightIcon" style="display: none"></div>
+                        </div>
+                        <p class="weather-type"></p>
+                        <p class="large-heading temperature"></p>
+                        <div class="atmospheric-conditions">
+                            <div class="atmospheric-condition">
+                                <p>Humidity</p>
+                                <p class="heading humidity"></p>                                    
+                            </div>
+                            <div class="atmospheric-condition">
+                                <p>Pressure</p>
+                                <p class="heading pressure"></p>                        
+                            </div>                                
+                        </div>
                     </div>
                 </div>            
             </div>
         </div>
 
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+        <script type="text/javascript" src="assets/lib/noframework/noframework.waypoints.min.js"></script>
         <script type="text/javascript" src="assets/lib/jquery/jquery-3.5.1.min.js"></script>
         <script type="text/javascript" src="assets/lib/jquery/jquery-ui.min.js"></script>
         <script type="text/javascript" src="assets/lib/moment/moment.js"></script>
         <script type="text/javascript" src="assets/lib/OwlCarousel/owl.carousel.min.js"></script>
+        <script type="text/javascript" src="assets/lib/dxcweathericons/dxcicons.js"></script>
+        <script type="text/javascript" src="assets/lib/dxcweathericons/dxcweathericons.js"></script>
+        <script type="text/javascript" src="assets/lib/snapsvg/snap.svg-min.js"></script>
         <script type="text/javascript" src="register-sw.js"></script>
         <script type="text/javascript" src="assets/js/main.js"></script>
     </body>

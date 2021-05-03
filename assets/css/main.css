@@ -2,8 +2,9 @@
   --primary-blue: #5F9EA0;
   --secondary-blue: #5F9ECF;
   --primary-white: #F0FFFF;
-  --data-container-dimensions: 360px;
+  --data-container-tablet-dimensions: 500px;
   --data-container-mobile-dimensions: 335px;
+  --data-container-mobile-small-dimensions: 300px;
   --data-container-border-width: 5px;
 }
 
@@ -33,7 +34,7 @@ body .tide-container {
   width: var(--data-container-mobile-dimensions);
   height: var(--data-container-mobile-dimensions);
   position: relative;
-  top: 150px;
+  top: 50px;
   left: calc(50% - (var(--data-container-mobile-dimensions) / 2) - var(--data-container-border-width));
 }
 
@@ -117,7 +118,11 @@ body .tide-container .data-container .owl-carousel .tide-info .heading {
 }
 
 body .tide-container .data-container .owl-carousel .tide-info .data {
-  font-size: 18px;
+  font-size: 1.2em;
+}
+
+body .tide-container .data-container .owl-carousel .tide-info .data.tide-time {
+  font-size: 1.5em;
 }
 
 body .tide-container .data-container .owl-carousel .tide-info .sub-heading {
@@ -139,25 +144,96 @@ body .tide-container .data-container .owl-carousel .tide-info .tides-info-contai
           justify-content: center;
 }
 
-body .tide-container .data-container .owl-carousel .tide-info .tides-info-container div span {
+body .tide-container .data-container .owl-carousel .tide-info .tides-info-container div p {
   margin-left: 7.5px;
   margin-right: 7.5px;
 }
 
 body .tide-container .data-container .owl-carousel .tide-info .tides-info-container .tide-times-headings-container {
-  margin-top: 0px;
+  margin-top: 5px;
 }
 
-body .tide-container .data-container .owl-carousel .tide-info .tides-info-container .tide-times-headings-container span {
+body .tide-container .data-container .owl-carousel .tide-info .tides-info-container .tide-times-headings-container p {
   margin-top: 0px;
+  font-size: 1.2em;
 }
 
 body .tide-container .data-container .owl-carousel .wind-info {
-  padding: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+body .tide-container .data-container .owl-carousel .wind-info .icon-container {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 15px;
+}
+
+body .tide-container .data-container .owl-carousel .wind-info .icon-container .wind-direction-icon {
+  width: 100%;
+  height: 100%;
+  -webkit-transition-property: -webkit-transform;
+  transition-property: -webkit-transform;
+  transition-property: transform;
+  transition-property: transform, -webkit-transform;
+  -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -webkit-transition-duration: 0.4s;
+          transition-duration: 0.4s;
+}
+
+body .tide-container .data-container .owl-carousel .wind-info .large-heading {
+  font-size: 1.5em;
+}
+
+body .tide-container .data-container .owl-carousel .wind-info .large-heading,
+body .tide-container .data-container .owl-carousel .wind-info .heading {
+  width: 100%;
+  text-align: center;
 }
 
 body .tide-container .data-container .owl-carousel .weather-info {
-  padding: 50px;
+  width: 80%;
+}
+
+body .tide-container .data-container .owl-carousel .weather-info * {
+  margin: auto;
+}
+
+body .tide-container .data-container .owl-carousel .weather-info .weathericon {
+  width: 150px;
+  height: 150px;
+}
+
+body .tide-container .data-container .owl-carousel .weather-info p {
+  margin: 0;
+  text-align: center;
+}
+
+body .tide-container .data-container .owl-carousel .weather-info .temperature {
+  font-size: 1.5em;
+}
+
+body .tide-container .data-container .owl-carousel .weather-info .atmospheric-conditions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+body .tide-container .data-container .owl-carousel .weather-info .atmospheric-conditions .atmospheric-condition {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 body .tide-container .data-container .owl-carousel .owl-item {
@@ -168,6 +244,31 @@ body .tide-container .data-container .owl-carousel .owl-dots {
   left: calc((var(--data-container-mobile-dimensions) / 2) - 36px);
 }
 
+@media (max-width: 325px) {
+  body {
+    background-size: auto 165px;
+  }
+  body .tide-container {
+    width: var(--data-container-mobile-small-dimensions);
+    height: var(--data-container-mobile-small-dimensions);
+    left: calc(50% - (var(--data-container-mobile-small-dimensions) / 2) - var(--data-container-border-width));
+  }
+  body .tide-container .tide-marker-container {
+    width: var(--data-container-mobile-small-dimensions);
+    height: var(--data-container-mobile-small-dimensions);
+  }
+  body .tide-container .data-container {
+    width: var(--data-container-mobile-small-dimensions);
+    height: var(--data-container-mobile-small-dimensions);
+  }
+  body .tide-container .data-container .owl-carousel .owl-item {
+    height: var(--data-container-mobile-small-dimensions);
+  }
+  body .tide-container .data-container .owl-carousel .owl-dots {
+    left: calc((var(--data-container-mobile-small-dimensions) / 2) - 36px);
+  }
+}
+
 @media (min-width: 450px) {
   body {
     background-position: bottom;
@@ -175,24 +276,24 @@ body .tide-container .data-container .owl-carousel .owl-dots {
   }
   body .tide-container {
     position: absolute;
-    top: calc(50% - (var(--data-container-dimensions) / 2) - var(--data-container-border-width));
-    left: calc(50% - (var(--data-container-dimensions) / 2) - var(--data-container-border-width));
+    top: calc(50% - (var(--data-container-tablet-dimensions) / 2) - var(--data-container-border-width));
+    left: calc(50% - (var(--data-container-tablet-dimensions) / 2) - var(--data-container-border-width));
   }
   body .tide-container .tide-marker-container {
-    width: var(--data-container-dimensions);
-    height: var(--data-container-dimensions);
+    width: var(--data-container-tablet-dimensions);
+    height: var(--data-container-tablet-dimensions);
   }
   body .tide-container .data-container {
-    width: var(--data-container-dimensions);
-    height: var(--data-container-dimensions);
+    width: var(--data-container-tablet-dimensions);
+    height: var(--data-container-tablet-dimensions);
     background-color: transparent;
     margin: auto;
   }
   body .tide-container .data-container .owl-carousel .owl-item {
-    height: var(--data-container-dimensions);
+    height: var(--data-container-tablet-dimensions);
   }
   body .tide-container .data-container .owl-carousel .owl-dots {
-    left: calc((var(--data-container-dimensions) / 2) - 36px);
+    left: calc((var(--data-container-tablet-dimensions) / 2) - 36px);
   }
 }
 

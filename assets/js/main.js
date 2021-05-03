@@ -1,6 +1,32 @@
 var tideMarker = 0;
+
 var lowTideTime;
 var highTideTime;
+
+var windViewed = false;
+var windDirection;
+var windDirectionDeg;
+
+var weatherIcons = {
+    "01d": "sunnyIcon",
+    "02d": "partlyCloudyIcon",
+    "03d": "mostlyCloudyIcon",
+    "04d": "cloudyIcon",
+    "09d": "sunnyShowersIcon",
+    "10d": "rainyIcon",
+    "11d": "lightningIcon",
+    "13d": "snowShowersIcon",
+    "50d": "mistySunnyIcon",
+    "01n": "clearNightIcon",
+    "02n": "partlyCloudyNightIcon",
+    "03n": "cloudyIcon",
+    "04n": "cloudyIcon",
+    "09n": "rainyIcon",
+    "10n": "rainyIcon",
+    "11n": "lightningIcon",
+    "13n": "snowShowersIcon",
+    "50n": "mistyNightIcon"
+}
 
 $(document).ready(function () {
     $('.owl-carousel').owlCarousel({
@@ -19,10 +45,36 @@ function setupEventListeners() {
     $(window).resize(() => {
         handleResolutionChange();
     });
+
+    $('.owl-carousel').owlCarousel().on('changed.owl.carousel', (event) => {
+        if (event.item.index === 1 && windDirectionDeg != null && !windViewed) {
+            animateWindIconPosition();
+        }
+    });
 }
 
 function handleResolutionChange() {
     setupTideMarker();
+}
+
+function animateWindIconPosition() {
+    window.setTimeout(() => {
+        windViewed = true;
+        var windDirectionIcon = $('.wind-direction-icon');
+
+        windDirectionIcon.css('-webkit-transform',`rotate(-15deg)`);
+        windDirectionIcon.css('-moz-transform',`rotate(-15deg)`);
+        windDirectionIcon.css('transform',`rotate(-15deg)`);
+
+        window.setTimeout(() => {
+            windDirectionIcon.css('transition-duration',`0.5s`);
+            windDirectionIcon.css('-webkit-transform',`rotate(${windDirectionDeg}deg)`);
+            windDirectionIcon.css('-moz-transform',`rotate(${windDirectionDeg}deg)`);
+            windDirectionIcon.css('transform',`rotate(${windDirectionDeg}deg)`);
+        }, 400);
+    }, 150);
+    
+    
 }
 
 function getData() {
@@ -97,6 +149,8 @@ function fetchData (longitude, latitude) {
         url: `https://tidesapi.herokuapp.com/weather/?lat=${latitude}&long=${longitude}`,
         success: (data) => {
             var windData = data.wind;
+            windDirectionDeg = windData.deg;
+
             var weatherData = data.weather;
             var weatherTemp = data.main.temp;
             var atmosphericData = data.main;
@@ -108,6 +162,13 @@ function fetchData (longitude, latitude) {
             console.error(error);
         }
     });
+}
+
+function populateLocation(locationData) {
+    locationData = locationData.results[0]?.components;
+    if (locationData != null) {
+        $('.location').text(`${locationData.city_district != null ? locationData.city_district : locationData.city}, ${locationData.county}, ${locationData.country}`);
+    }
 }
 
 function renderTides(tideData) {
@@ -169,11 +230,11 @@ function calculateTideHeight(nextLowTide, nextHighTide) {
         tideMarker = currentTideTime / timeDifference;
         setupTideMarker();
     }
-    else if (nextLowTide > currentTime && currentTime > nextHighTide) {
+    else if (nextLowTide > currentTime) {
         let currentTideTime = Math.abs(currentTime - highTideTime);
         let timeDifference = nextLowTide - nextHighTide;
         
-        tideMarker = currentTideTime / timeDifference;
+        tideMarker = 1 - (currentTideTime / timeDifference);
         setupTideMarker();
     }
 }
@@ -206,16 +267,67 @@ function setupTideMarker() {
     }, 600);
 }
 
-function populateLocation(locationData) {
-    locationData = locationData.results[0]?.components;
-    if (locationData != null) {
-        $('.location').text(`${locationData.city_district != null ? locationData.city_district : locationData.city}, ${locationData.county}, ${locationData.country}`);
+function renderWind (windData) {
+    if (windData.deg >= 11.25 && windData.deg < 33.75) {
+        windDirection = 'NNE';
     }
+    else if (windData.deg >= 33.75 && windData.deg < 56.25) {
+        windDirection = 'NE';
+    }
+    else if (windData.deg >= 56.25 && windData.deg < 78.75) {
+        windDirection = 'ENE';
+    }
+    else if (windData.deg >= 78.75 && windData.deg < 101.25) {
+        windDirection = 'E';
+    }
+    else if (windData.deg >= 101.25 && windData.deg < 123.75) {
+        windDirection = 'ESE';
+    }
+    else if (windData.deg >= 123.75 && windData.deg < 146.25) {
+        windDirection = 'SE';
+    }
+    else if (windData.deg >= 146.25 && windData.deg < 168.75) {
+        windDirection = 'SSE';
+    }
+    else if (windData.deg >= 168.75 && windData.deg < 191.25) {
+        windDirection = 'S';
+    }
+    else if (windData.deg >= 191.25 && windData.deg < 213.75) {
+        windDirection = 'SSW';
+    }
+    else if (windData.deg >= 213.75 && windData.deg < 236.25) {
+        windDirection = 'SW';
+    }
+    else if (windData.deg >= 236.25 && windData.deg < 258.75) {
+        windDirection = 'WSW';
+    }
+    else if (windData.deg >= 258.75 && windData.deg < 281.25) {
+        windDirection = 'W';
+    }
+    else if (windData.deg >= 281.25 && windData.deg < 303.75) {
+        windDirection = 'WNW';
+    }
+    else if (windData.deg >= 303.75 && windData.deg < 326.25) {
+        windDirection = 'NW';
+    }
+    else if (windData.deg >= 326.25 && windData.deg < 348.75) {
+        windDirection = 'NNE';
+    }
+    else { // Wind Direction is North
+        windDirection = 'N';
+    }
+
+    $('.wind-direction').html(windDirection);
+    var windSpeedKnots = Math.round (windData.speed * 1.9438444924574);
+    var windSpeedMPH = Math.round (windData.speed * 2.237);
+    $('.wind-speed').html(`${windSpeedMPH} mph  -  ${windSpeedKnots} knots`);
 }
 
-function populateTideData() {
-    $('.low-tide').text('12:00');
-    $('.low-tide-height').text('1.65m');
-    $('.high-tide').text('6:00');
-    $('.high-tide-height').text('1.05m');
+function renderWeather(weatherData, weatherTemp, atmosphericData) {
+    $(`#${weatherIcons[weatherData[0].icon]}`).css ('display', 'block');
+
+    $('.weather-type').html (`${weatherData[0].main}`);
+    $('.temperature').html (`${Math.round (weatherTemp)}\u00B0C`);
+    $('.humidity').html (`${atmosphericData.humidity}%`);
+    $('.pressure').html (`${atmosphericData.pressure}hPa`);
 }

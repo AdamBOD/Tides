@@ -3,8 +3,9 @@
 	--secondary-blue: #5F9ECF;
 	--primary-white: #F0FFFF;
 
-	--data-container-dimensions: 360px;
+	--data-container-tablet-dimensions: 500px;
 	--data-container-mobile-dimensions: 335px;
+	--data-container-mobile-small-dimensions: 300px;
 	--data-container-border-width: 5px;
 }
 
@@ -38,7 +39,7 @@ body {
         height: var(--data-container-mobile-dimensions);
 
         position: relative;
-        top: 150px;
+        top: 50px;
         left: calc(50% - (var(--data-container-mobile-dimensions) / 2) - var(--data-container-border-width));
 
         .tide-marker-container {
@@ -130,7 +131,11 @@ body {
                     }
     
                     .data {
-                        font-size: 18px;
+                        font-size: 1.2em;
+
+                        &.tide-time {
+                            font-size: 1.5em;
+                        }
                     }
     
                     .sub-heading {
@@ -146,28 +151,86 @@ body {
                             display: flex;
                             justify-content: center;
     
-                            span {
+                            p {
                                 margin-left: 7.5px;
                                 margin-right: 7.5px;
                             }
                         }
     
                         .tide-times-headings-container {
-                            margin-top: 0px;
+                            margin-top: 5px;
     
-                            span {
+                            p {
                                 margin-top: 0px;
+
+                                font-size: 1.2em;
                             }
                         }
                     }
                 }
 
                 .wind-info {
-                    padding: 50px;
+                    display: flex;
+                    flex-direction: column;
+
+                    .icon-container {
+                        width: 150px;
+                        height: 150px;
+
+                        margin-bottom: 15px;
+
+                        .wind-direction-icon {
+                            width: 100%;
+                            height: 100%;
+
+                            transition-property: transform;
+                            transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                            transition-duration: 0.4s;
+                        }
+                    }
+
+                    .large-heading {
+                        font-size: 1.5em
+                    }
+
+                    .large-heading,
+                    .heading {
+                        width: 100%;
+
+                        text-align: center;
+                    }
                 }
             
                 .weather-info {
-                    padding: 50px;
+                    width: 80%;
+
+                    * {
+                        margin: auto;
+                    }
+
+                    .weathericon {
+                        width: 150px;
+                        height: 150px;
+                    }
+
+                    p {
+                        margin: 0;
+
+                        text-align: center;
+                    }
+
+                    .temperature {
+                        font-size: 1.5em;
+                    }
+
+                    .atmospheric-conditions {
+                        display: flex;
+                        flex-direction: row;
+
+                        .atmospheric-condition {
+                            flex-direction: column;
+                        }
+                    }
                 }
             }
 
@@ -184,6 +247,39 @@ body {
     }
 }
 
+@media (max-width: 325px) {
+    body {
+        background-size: auto 165px;
+
+        .tide-container {
+            width: var(--data-container-mobile-small-dimensions);
+            height: var(--data-container-mobile-small-dimensions);
+            
+            left: calc(50% - (var(--data-container-mobile-small-dimensions) / 2) - var(--data-container-border-width));
+
+            .tide-marker-container {
+                width: var(--data-container-mobile-small-dimensions);
+                height: var(--data-container-mobile-small-dimensions);
+            }
+
+            .data-container {
+                width: var(--data-container-mobile-small-dimensions);
+                height: var(--data-container-mobile-small-dimensions);
+
+                .owl-carousel {
+                    .owl-item {
+                        height: var(--data-container-mobile-small-dimensions);
+                    }
+    
+                    .owl-dots {
+                        left: calc((var(--data-container-mobile-small-dimensions) / 2) - 36px);
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media (min-width: 450px) {
 	body {
         background-position: bottom;
@@ -191,17 +287,17 @@ body {
 
         .tide-container {
             position: absolute;
-            top: calc(50% - (var(--data-container-dimensions) / 2) - var(--data-container-border-width));
-            left: calc(50% - (var(--data-container-dimensions) / 2) - var(--data-container-border-width));
+            top: calc(50% - (var(--data-container-tablet-dimensions) / 2) - var(--data-container-border-width));
+            left: calc(50% - (var(--data-container-tablet-dimensions) / 2) - var(--data-container-border-width));
 
             .tide-marker-container {
-                width: var(--data-container-dimensions);
-                height: var(--data-container-dimensions);
+                width: var(--data-container-tablet-dimensions);
+                height: var(--data-container-tablet-dimensions);
             }
     
             .data-container {
-                width: var(--data-container-dimensions);
-                height: var(--data-container-dimensions);
+                width: var(--data-container-tablet-dimensions);
+                height: var(--data-container-tablet-dimensions);
     
                 background-color: transparent;
     
@@ -209,11 +305,11 @@ body {
     
                 .owl-carousel {
                     .owl-item {
-                        height: var(--data-container-dimensions);
+                        height: var(--data-container-tablet-dimensions);
                     }
     
                     .owl-dots {
-                        left: calc((var(--data-container-dimensions) / 2) - 36px);
+                        left: calc((var(--data-container-tablet-dimensions) / 2) - 36px);
                     }
                 }
             }
