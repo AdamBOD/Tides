@@ -179,6 +179,13 @@ function calculateTideHeight(nextLowTide, nextHighTide) {
 }
 
 function setupTideMarker() {
+    if (tideMarker > 0.95) {
+        tideMarker = 0.95;
+    }
+    else if (tideMarker < 0.05) {
+        tideMarker = 0.05;
+    }
+
     var tideMarkerHeight = $('.data-container').height() * tideMarker;
     var waveMarkerHeight = 25;
     var tideMarkerContainerHeight = $('.tide-marker-container').height();
