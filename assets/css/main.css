@@ -34,7 +34,7 @@ body .tide-container {
   width: var(--data-container-mobile-dimensions);
   height: var(--data-container-mobile-dimensions);
   position: relative;
-  top: 50px;
+  top: 125px;
   left: calc(50% - (var(--data-container-mobile-dimensions) / 2) - var(--data-container-border-width));
 }
 
@@ -67,6 +67,18 @@ body .tide-container .tide-marker-container .wave-marker {
   animation-timing-function: linear;
 }
 
+body .tide-container .loading-icon {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  left: calc(50% - 75px);
+  top: calc(50% - 75px);
+}
+
+body .tide-container .loading-icon.loaded {
+  display: none;
+}
+
 body .tide-container .data-container {
   width: var(--data-container-mobile-dimensions);
   height: var(--data-container-mobile-dimensions);
@@ -80,8 +92,13 @@ body .tide-container .data-container {
   overflow: hidden;
 }
 
+body .tide-container .data-container.loaded .owl-carousel {
+  display: block;
+}
+
 body .tide-container .data-container .owl-carousel {
   position: relative;
+  display: none;
 }
 
 body .tide-container .data-container .owl-carousel .owl-item {

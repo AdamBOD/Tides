@@ -1,5 +1,9 @@
 var tideMarker = 0;
 
+var locationLoaded = false;
+var tidesLoaded = false;
+var weatherLoaded = false;
+
 var lowTideTime;
 var highTideTime;
 
@@ -73,8 +77,13 @@ function animateWindIconPosition() {
             windDirectionIcon.css('transform',`rotate(${windDirectionDeg}deg)`);
         }, 400);
     }, 150);
-    
-    
+}
+
+function checkLoaded() {
+    if (locationLoaded && tidesLoaded && weatherLoaded) {
+        $('.loading-icon').addClass('loaded');
+        $('.data-container').addClass('loaded');
+    }
 }
 
 function getData() {
@@ -109,6 +118,9 @@ function getLocationAlternative() {
         url: `https://tidesapi.herokuapp.com/ip-location`,
         success: (data) => {
             fetchData(data.lon, data.lat);
+
+            locationLoaded = true;
+            checkLoaded();
         },
         error: (error) => {
             console.error (`Error getting API data: ${error.message}`);
@@ -125,6 +137,9 @@ function fetchData (longitude, latitude) {
         success: (data) => {
             var locationData = data;
             populateLocation(locationData);
+
+            locationLoaded = true;
+            checkLoaded();
         },
         error: (error) => {
             console.error(error);
@@ -137,6 +152,9 @@ function fetchData (longitude, latitude) {
         success: (data) => {
             var tideData = data;
             renderTides(tideData);
+
+            tidesLoaded = true;
+            checkLoaded();
         },
         error: (error) => {
             console.error(error);
@@ -157,6 +175,9 @@ function fetchData (longitude, latitude) {
 
             renderWind (windData);
             renderWeather (weatherData, weatherTemp, atmosphericData);
+
+            weatherLoaded = true;
+            checkLoaded();
         },
         error: (error) => {
             console.error(error);

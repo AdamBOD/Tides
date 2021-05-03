@@ -39,7 +39,7 @@ body {
         height: var(--data-container-mobile-dimensions);
 
         position: relative;
-        top: 50px;
+        top: 125px;
         left: calc(50% - (var(--data-container-mobile-dimensions) / 2) - var(--data-container-border-width));
 
         .tide-marker-container {
@@ -81,6 +81,19 @@ body {
             }
         }
 
+        .loading-icon {
+            width: 150px;
+            height: 150px;
+            
+            position: absolute;
+            left: calc(50% - 75px);
+            top: calc(50% - 75px);
+
+            &.loaded {
+                display: none;
+            }
+        }
+
         .data-container {
             width: var(--data-container-mobile-dimensions);
             height: var(--data-container-mobile-dimensions);
@@ -97,9 +110,17 @@ body {
             border-radius: 50%;
     
             overflow: hidden;
+
+            &.loaded {
+                .owl-carousel {
+                    display: block;
+                }
+            }
     
             .owl-carousel {
                 position: relative;
+
+                display: none;
     
                 .owl-item {
                     height: var(--data-container-mobile-dimensions);
