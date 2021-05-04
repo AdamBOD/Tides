@@ -241,21 +241,19 @@ function renderTides(tideData) {
     }
 }
 
-function calculateTideHeight(nextLowTide, nextHighTide) {
+function calculateTideHeight(lowTide, highTide) {
     let currentTime = new Date();
 
-    if (nextLowTide < currentTime) {
-        let currentTideTime = Math.abs(currentTime - lowTideTime);
-        let timeDifference = nextHighTide - nextLowTide;
+    if (lowTide < highTide) {
+        let timeDifference = highTide - currentTime;
+        tideMarker = 1 - (timeDifference / (highTide - lowTide));
 
-        tideMarker = currentTideTime / timeDifference;
         setupTideMarker();
     }
-    else if (nextLowTide > currentTime) {
-        let currentTideTime = Math.abs(currentTime - highTideTime);
-        let timeDifference = nextLowTide - nextHighTide;
-        
-        tideMarker = 1 - (currentTideTime / timeDifference);
+    else if (lowTide > highTide) {
+        let timeDifference = lowTide - currentTime;
+        tideMarker = timeDifference / (lowTide - highTide);
+
         setupTideMarker();
     }
 }
@@ -264,8 +262,8 @@ function setupTideMarker() {
     if (tideMarker > 0.95) {
         tideMarker = 0.95;
     }
-    else if (tideMarker < 0.05) {
-        tideMarker = 0.05;
+    else if (tideMarker < 0.1) {
+        tideMarker = 0.1;
     }
 
     var tideMarkerHeight = $('.data-container').height() * tideMarker;
