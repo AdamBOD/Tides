@@ -203,6 +203,17 @@ function renderTides(tideData) {
         $('.tide-location').text(`(${tideLocation})`);
     }
 
+    let currentTime = new Date();
+
+    if (tideData.extremes[0].date !== NaN && tideData.extremes[1].date !== NaN) {
+        let firstDate = moment.utc(tideData.extremes[0].date);
+        let secondDate = moment.utc(tideData.extremes[1].date);
+
+        if (firstDate < currentTime && secondDate < currentTime) {
+            tideData.extremes.splice(0, 1);
+        }
+    }
+
     if (tideData.extremes[0].date !== NaN) {
         if (tideData.extremes[0].type === 'High') {
             var highTideTimeUtc = moment.utc(tideData.extremes[0].date);
