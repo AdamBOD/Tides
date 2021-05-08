@@ -34,7 +34,7 @@ var weatherIcons = {
 
 $(document).ready(function () {
     $('.owl-carousel').owlCarousel({
-        dots: true, 
+        dots: true,
         items: 1,
         loop: false,
         nav: false,
@@ -66,15 +66,15 @@ function animateWindIconPosition() {
         windViewed = true;
         var windDirectionIcon = $('.wind-direction-icon');
 
-        windDirectionIcon.css('-webkit-transform',`rotate(-15deg)`);
-        windDirectionIcon.css('-moz-transform',`rotate(-15deg)`);
-        windDirectionIcon.css('transform',`rotate(-15deg)`);
+        windDirectionIcon.css('-webkit-transform', `rotate(-15deg)`);
+        windDirectionIcon.css('-moz-transform', `rotate(-15deg)`);
+        windDirectionIcon.css('transform', `rotate(-15deg)`);
 
         window.setTimeout(() => {
-            windDirectionIcon.css('transition-duration',`0.5s`);
-            windDirectionIcon.css('-webkit-transform',`rotate(${windDirectionDeg}deg)`);
-            windDirectionIcon.css('-moz-transform',`rotate(${windDirectionDeg}deg)`);
-            windDirectionIcon.css('transform',`rotate(${windDirectionDeg}deg)`);
+            windDirectionIcon.css('transition-duration', `0.5s`);
+            windDirectionIcon.css('-webkit-transform', `rotate(${windDirectionDeg}deg)`);
+            windDirectionIcon.css('-moz-transform', `rotate(${windDirectionDeg}deg)`);
+            windDirectionIcon.css('transform', `rotate(${windDirectionDeg}deg)`);
         }, 400);
     }, 150);
 }
@@ -89,7 +89,7 @@ function checkLoaded() {
 function getData() {
     if (navigator.geolocation != null) {
         navigator.geolocation.getCurrentPosition((data) => {
-            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
                 fetchData(data.coords.longitude, data.coords.latitude);
             }
             else {
@@ -101,20 +101,20 @@ function getData() {
                 }
             }
         },
-        (error) => {
-            console.error(error);
-            getLocationAlternative();
-        },
-        {
-            enableHighAccuracy: true,
-            maximumAge: 0
-        });
+            (error) => {
+                console.error(error);
+                getLocationAlternative();
+            },
+            {
+                enableHighAccuracy: true,
+                maximumAge: 0
+            });
     }
 }
 
 function getLocationAlternative() {
     console.log('Fetching Location using API');
-    $.ajax ({
+    $.ajax({
         url: `https://tidesapi.herokuapp.com/ip-location`,
         success: (data) => {
             fetchData(data.lon, data.lat);
@@ -123,16 +123,22 @@ function getLocationAlternative() {
             checkLoaded();
         },
         error: (error) => {
-            console.error (`Error getting API data: ${error.message}`);
-            $('.location').html('Location unavailable');
-            $('.highTide').html('--:--');
-            $('.lowTide').html('--:--');
+            console.log (error)
+            console.error('Error getting API data');
+            $('.location').text('Location unavailable');
+            $('.high-tide-time').text('--:--');
+            $('.low-tide-time').text('--:--');
+
+            locationLoaded = true;
+            tidesLoaded = true;
+            weatherLoaded = true;
+            checkLoaded();
         }
     });
 }
 
-function fetchData (longitude, latitude) {
-    $.ajax ({
+function fetchData(longitude, latitude) {
+    $.ajax({
         url: `https://tidesapi.herokuapp.com/location/?lat=${latitude}&long=${longitude}`,
         success: (data) => {
             var locationData = data;
@@ -143,11 +149,18 @@ function fetchData (longitude, latitude) {
         },
         error: (error) => {
             console.error(error);
-            $('.location').html ('API unavailable');
+            $('.location').html('API unavailable');
+            $('.high-tide-time').text('--:--');
+            $('.low-tide-time').text('--:--');
+
+            locationLoaded = true;
+            tidesLoaded = true;
+            weatherLoaded = true;
+            checkLoaded();
         }
     });
 
-    $.ajax ({
+    $.ajax({
         url: `https://tidesapi.herokuapp.com/tides/?lat=${latitude}&long=${longitude}`,
         success: (data) => {
             var tideData = data;
@@ -158,12 +171,17 @@ function fetchData (longitude, latitude) {
         },
         error: (error) => {
             console.error(error);
-            $('.highTide').html ('--:--');
-            $('.lowTide').html ('--:--');
+            $('.high-tide-time').text('--:--');
+            $('.low-tide-time').text('--:--');
+
+            locationLoaded = true;
+            tidesLoaded = true;
+            weatherLoaded = true;
+            checkLoaded();
         }
     });
 
-    $.ajax ({
+    $.ajax({
         url: `https://tidesapi.herokuapp.com/weather/?lat=${latitude}&long=${longitude}`,
         success: (data) => {
             var windData = data.wind;
@@ -173,14 +191,19 @@ function fetchData (longitude, latitude) {
             var weatherTemp = data.main.temp;
             var atmosphericData = data.main;
 
-            renderWind (windData);
-            renderWeather (weatherData, weatherTemp, atmosphericData);
+            renderWind(windData);
+            renderWeather(weatherData, weatherTemp, atmosphericData);
 
             weatherLoaded = true;
             checkLoaded();
         },
         error: (error) => {
             console.error(error);
+
+            locationLoaded = true;
+            tidesLoaded = true;
+            weatherLoaded = true;
+            checkLoaded();
         }
     });
 }
@@ -194,9 +217,9 @@ function populateLocation(locationData) {
 
 function renderTides(tideData) {
     if (tideData.tideLocationData.results != null && tideData.tideLocationData.results.length > 0) {
-        var tideLocation = tideData.tideLocationData.results[0].components.city || 
-            tideData.tideLocationData.results[0].components.city_district || 
-            tideData.tideLocationData.results[0].components.town || 
+        var tideLocation = tideData.tideLocationData.results[0].components.city ||
+            tideData.tideLocationData.results[0].components.city_district ||
+            tideData.tideLocationData.results[0].components.town ||
             tideData.tideLocationData.results[0].components.village ||
             tideData.tideLocationData.results[0].components.county;
 
@@ -248,7 +271,7 @@ function renderTides(tideData) {
         calculateTideHeight(lowTideTime, highTideTime);
     }
     else {
-        $('.highTide').html ('Error getting tide data.');
+        $('.highTide').html('Error getting tide data.');
     }
 }
 
@@ -297,7 +320,7 @@ function setupTideMarker() {
     }, 600);
 }
 
-function renderWind (windData) {
+function renderWind(windData) {
     if (windData.deg >= 11.25 && windData.deg < 33.75) {
         windDirection = 'NNE';
     }
@@ -348,16 +371,16 @@ function renderWind (windData) {
     }
 
     $('.wind-direction').html(windDirection);
-    var windSpeedKnots = Math.round (windData.speed * 1.9438444924574);
-    var windSpeedMPH = Math.round (windData.speed * 2.237);
+    var windSpeedKnots = Math.round(windData.speed * 1.9438444924574);
+    var windSpeedMPH = Math.round(windData.speed * 2.237);
     $('.wind-speed').html(`${windSpeedMPH} mph  -  ${windSpeedKnots} knots`);
 }
 
 function renderWeather(weatherData, weatherTemp, atmosphericData) {
-    $(`#${weatherIcons[weatherData[0].icon]}`).css ('display', 'block');
+    $(`#${weatherIcons[weatherData[0].icon]}`).css('display', 'block');
 
-    $('.weather-type').html (`${weatherData[0].main}`);
-    $('.temperature').html (`${Math.round (weatherTemp)}\u00B0C`);
-    $('.humidity').html (`${atmosphericData.humidity}%`);
-    $('.pressure').html (`${atmosphericData.pressure}hPa`);
+    $('.weather-type').html(`${weatherData[0].main}`);
+    $('.temperature').html(`${Math.round(weatherTemp)}\u00B0C`);
+    $('.humidity').html(`${atmosphericData.humidity}%`);
+    $('.pressure').html(`${atmosphericData.pressure}hPa`);
 }
